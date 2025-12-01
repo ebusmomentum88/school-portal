@@ -1,33 +1,136 @@
-/* ... your existing global and hero-slider code ... */
-
-/* ENLARGE SIGN-IN MODAL FORM CONTROLS */
-.big-control,
-.auth-form .form-control,
-.auth-form select.form-control,
-.auth-form input.form-control,
-.auth-form button.btn {
-  font-size: 1.28rem !important;
-  min-height: 56px !important;
-  padding: 16px 14px !important;
-  border-radius: 8px !important;
-}
-
-/* Make Sign In modal labels/headers look good */
-.auth-form label {
-  font-size: 1.08rem !important;
-  font-weight: 600;
-}
-.auth-form .btn-block {
+body, html {
   width: 100%;
+  height: 100%;
+  margin: 0; padding: 0;
+  font-family: 'Inter', sans-serif;
+  background: #222;
+  overflow: hidden;
 }
 
-/* Optional: make modal itself bigger on wider view */
-.modal {
-  min-width: 350px;
-  max-width: 95vw;
+/* Top Navigation Bar */
+.topnav {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.93);
+  box-shadow: 0 4px 15px rgba(120,130,175,.07);
+  height: 68px;
+  position: fixed;
+  top: 0; left: 0; z-index: 101;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5vw;
+}
+.nav-brand {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #314583;
+  letter-spacing: 1px;
+}
+.topnav .nav-menu {
+  display: flex;
+  gap: 25px;
+  margin: 0;
+  list-style: none;
+  padding: 0;
+}
+.topnav .nav-menu li a {
+  color: #314583;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 8px 18px;
+  border-radius: 7px;
+  font-weight: 600;
+  transition: background .19s;
+}
+.topnav .nav-menu li a.active,
+.topnav .nav-menu li a:hover {
+  background: #667eea;
+  color: #fff;
+}
+.topnav .nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  border: none;
+  outline: none;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
-/* HERO SLIDER (unchanged, but ensure .active handles opacity etc.) */
+/* HERO SECTION Fullscreen */
+.landing-fullscreen {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center; justify-content: center;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
+.hero-landing-content {
+  z-index: 4;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 95vh;
+  width: 100vw;
+  margin-top: 44px;
+}
+.hero-landing-content h1,
+.landing-h1 {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 2px 12px rgba(60,70,120,0.41);
+  margin-bottom: 16px;
+  text-align: center;
+}
+.hero-landing-content p {
+  color: #eaefff;
+  max-width: 650px;
+  font-size: 1.28rem;
+  margin-bottom: 32px;
+  text-align: center;
+}
+.hero-actions {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.btn, .btn-primary, .btn-outline, .btn-lg, .btn-block {
+  font-size: 1.1rem;
+  border-radius: 8px;
+  padding: 14px 32px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+}
+.btn-outline {
+  background: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+}
+.btn-outline:hover {
+  background: rgba(102,126,234,0.07);
+}
+.btn-lg { font-size: 1.16rem; }
+.btn-block { width: 100%; }
+
+/* HERO SLIDER - background images & fade animation */
 .hero-slider {
   position: absolute;
   top: 0; left: 0; width: 100vw; height: 100vh;
@@ -67,30 +170,67 @@
   pointer-events: none;
 }
 
-/* Centered Hero Content Over the Slider */
-.hero-landing-content {
-  z-index: 20;
+/* MODAL AND AUTH FORM (SIGN IN) */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  z-index: 3000;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(44,59,115,0.43);
+  backdrop-filter: blur(2px);
+  align-items: center;
+  justify-content: center;
+}
+.modal {
+  background: #fff;
+  border-radius: 16px;
+  padding: 38px 32px 30px 32px;
+  box-shadow: 0 8px 32px rgba(60,70,120,0.13);
+  min-width: 360px;
+  min-height: 180px;
+  max-width: 97vw;
+  max-height: 94vh;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  min-height: 96vh;
-  width: 100vw;
-  margin-top: 44px;
+}
+.modal-close {
+  position: absolute; right: 18px; top: 12px;
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #667eea;
+}
+/* ENLARGE SIGN-IN MODAL FORM CONTROLS */
+.auth-form .form-control,
+.auth-form select.form-control,
+.auth-form input.form-control,
+.auth-form button.btn {
+  font-size: 1.22rem;
+  min-height: 54px;
+  padding: 15px 14px;
+  border-radius: 8px;
+}
+.auth-form label {
+  font-size: 1.13rem;
+  font-weight: 600;
+}
+.auth-form .btn-block {
+  width: 100%;
 }
 
-/* HERO TEXT AND BUTTONS REMAIN CENTERED/LARGE */
-
-/* Responsive adjustments to keep modal and form controls usable on mobile */
-@media (max-width: 600px) {
-  .big-control,
-  .auth-form .form-control,
-  .auth-form select.form-control,
-  .auth-form input.form-control,
-  .auth-form button.btn {
-    font-size: 1rem !important;
-    min-height: 44px !important;
-    padding: 12px 10px !important;
+/* Responsive adjustments for smaller screens */
+@media (max-width: 700px) {
+  .topnav { flex-direction: column; gap: 9px; height: auto; padding: 8px 12px 0 12px;}
+  .topnav .nav-menu { gap: 10px; }
+  .hero-landing-content h1 { font-size: 1.6rem; }
+  .hero-landing-content p { font-size: 1rem; }
+  .btn, .btn-primary, .btn-outline { padding: 11px 15px; font-size: 0.97rem;}
+  .modal { min-width: 88vw; padding: 15px 4vw;}
+  .auth-form .form-control, .auth-form select.form-control, .auth-form input.form-control, .auth-form button.btn {
+    font-size: 0.97rem; min-height: 42px; padding: 11px 9px;
   }
 }
