@@ -4,16 +4,13 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>SchoolPortal - Modern School Management System</title>
-
   <!-- Feather icons -->
   <script src="https://unpkg.com/feather-icons"></script>
-
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- ========== TOP NAVIGATION BAR ========== -->
   <nav class="topnav">
     <div class="nav-brand">SchoolPortal</div>
     <ul class="nav-menu">
@@ -29,24 +26,18 @@
     </button>
   </nav>
   
-  <!-- ========== HERO SLIDER BG LANDING SECTION ========== -->
+  <!-- HERO SECTION -->
   <div class="hero landing-fullscreen">
-    <!-- IMAGE SLIDER (reuse your original images block) -->
     <div class="hero-slider">
       <div class="hero-slide active" style="background-image: url('images/image1.jpg');"></div>
       <div class="hero-slide" style="background-image: url('images/image2.jpg');"></div>
       <div class="hero-slide" style="background-image: url('images/image3.jpg');"></div>
     </div>
-    <!-- HERO CONTENT CENTERED -->
     <div class="hero-landing-content">
       <h1 class="landing-h1">Modern School Management</h1>
       <p>Streamline academics with our comprehensive platform: manage grades, CBT exams, lesson notes, fee payments, and generate professional report cards.</p>
       <div class="hero-actions">
-        <button class="btn btn-primary btn-lg" id="open-dashboard">
-          <span data-feather="home"></span>
-          Dashboard
-        </button>
-        <button class="btn btn-outline btn-lg" id="open-signin2">
+        <button class="btn btn-primary btn-lg" id="open-signin2">
           <span data-feather="log-in"></span>
           Sign In
         </button>
@@ -54,16 +45,16 @@
     </div>
   </div>
 
-  <!-- ========== SIGN IN MODAL ========== -->
+  <!-- SIGN IN MODAL -->
   <div class="modal-overlay" id="signin-modal">
     <div class="modal">
       <button class="modal-close" onclick="document.getElementById('signin-modal').style.display='none'">×</button>
       <h2>Sign In</h2>
-      <!-- re-use your login form -->
+      <!-- Login form -->
       <form class="auth-form" onsubmit="return false;">
         <div class="form-group">
           <label>Select Role</label>
-          <select id="login-role" class="form-control">
+          <select id="login-role" class="form-control big-control">
             <option value="admin">Admin</option>
             <option value="teacher">Teacher</option>
             <option value="student">Student</option>
@@ -72,14 +63,14 @@
         </div>
         <div class="form-group">
           <label>Username or Email</label>
-          <input id="login-username" class="form-control" placeholder="Enter your username" />
+          <input id="login-username" class="form-control big-control" placeholder="Enter your username" />
         </div>
         <div class="form-group">
           <label>Password</label>
-          <input id="login-password" type="password" class="form-control" placeholder="Enter your password" />
+          <input id="login-password" type="password" class="form-control big-control" placeholder="Enter your password" />
         </div>
         <div class="form-actions">
-          <button class="btn btn-primary btn-block" type="submit">
+          <button class="btn btn-primary btn-block big-control" type="submit">
             Sign In <span data-feather="arrow-right"></span>
           </button>
         </div>
@@ -87,39 +78,33 @@
     </div>
   </div>
 
-  <!-- ========== DASHBOARD MODAL ========== -->
-  <div class="modal-overlay" id="dashboard-modal">
-    <div class="modal">
-      <button class="modal-close" onclick="document.getElementById('dashboard-modal').style.display='none'">×</button>
-      <h2>Dashboard Demo</h2>
-      <div>
-        <p>This is a placeholder for your dashboard overview. Add widgets or summary here as needed.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- OPTIONAL: ADD YOUR ABOUT/CONTACT ETC SECTIONS HERE -->
+  <!-- Sections placeholders for navigation -->
   <section id="about" class="landing-section"></section>
   <section id="vision" class="landing-section"></section>
   <section id="contact" class="landing-section"></section>
   <section id="newsletter" class="landing-section"></section>
-  
+
   <script>
     feather.replace();
-    // Open modals
-    document.getElementById('open-dashboard').onclick = function() {
-      document.getElementById('dashboard-modal').style.display='flex';
-    };
+    // Open modal from either button
     document.getElementById('open-signin').onclick =
     document.getElementById('open-signin2').onclick = function() {
       document.getElementById('signin-modal').style.display='flex';
     };
-    // Simple modal close by clicking outside (bonus)
     document.querySelectorAll('.modal-overlay').forEach(function(modal) {
       modal.onclick = function(e) {
         if (e.target === modal) modal.style.display='none';
       };
     });
+
+    /* HERO SLIDER - automatic cycling */
+    let current = 0;
+    const slides = document.querySelectorAll('.hero-slide');
+    setInterval(() => {
+      slides[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
+    }, 4100); // Change image every 4.1 seconds
   </script>
 </body>
 </html>
